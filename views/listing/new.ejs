@@ -1,0 +1,50 @@
+<% layout("/layouts/boilerplate") %>
+
+    <body>
+        <div class="row">
+            <div class="col-8 offset-2">
+                <h3>Add New Listing</h3>
+                <form action="/listing" method="POST"  novalidate class="needs-validation">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" name="title" placeholder="Enter Title" id="title" class="form-control"
+                        required>
+                        <div class="valid-feedback">Title is good</div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-5">
+                            <label for="price" class="form-label">Price</label>
+                            <input name="price" placeholder="Price" id="price" class="form-control" required>
+                            <div class="invalid-feedback">Please enter a valid pirce</div>
+                            <div class="valid-feedback">Valid pirce</div>
+                        </div>
+                        <div class="mb-3 col-md-7">
+                            <label for="location" class="form-label">Location</label>
+                            <input type="text" name="location" placeholder="Location of Hotel / Place" id="location" class="form-control" required>
+                            <div class="invalid-feedback">Valid location</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="country" class="form-label">Country</label>
+                        <input type="text" name="country" placeholder="Country name" id="country" class="form-control" required>
+                        <div class="invalid-feedback">Valid country name</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image Link</label>
+                        <input type="text" name="image" placeholder="image URL" id="image" class="form-control" required>
+                        <div class="invalid-feedback">Enter valid image URL/Link</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea name="description" id="description" class="form-control"
+                            placeholder="About the image" required></textarea>
+                            <div class="invalid-feedback">Write somthing about image</div>
+                    </div>
+                    <br>
+                    <button class="btn btn-dark mb-3 add-btn">Add</button>
+                </form>
+            </div>
+        </div>
+    </body>
