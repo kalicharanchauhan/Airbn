@@ -19,7 +19,7 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
-// const User = require("./models/user.js");
+const User = require("./models/user.js");
 
 
 
@@ -48,10 +48,10 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-// passport.use(new LocalStrategy(User.authenticate()));
+passport.use(new LocalStrategy(User.authenticate()));
 
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 main().then(() => {
     console.log("connection sucess:");
@@ -72,7 +72,13 @@ app.get("/demouser",async(req,res)=>{
         email:"kali@gmail.com",
         username:"kalicharan"
     });
-    const newUser = await User.register(fakeuser,"helloworld");
+
+    const newUser = await User.register(fakeuser, "helloworld");
+    response.send(newUser); 
+});
+
+app.get("/check",(req,res)=>{
+    console.log(passportLocalMongoose);
 });
 
 app.use("/listing", listing); 
