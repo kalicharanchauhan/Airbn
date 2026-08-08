@@ -133,3 +133,10 @@ body{
     justify-content: center;
 
 }
+
+.signup{
+    margin-top: 10px;
+}
+.signup-form button{
+    margin-bottom: 20px;
+}

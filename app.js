@@ -13,13 +13,14 @@ const { listingSchema } = require("./Joi/schema.js");
 const Review = require("./models/review.js");
 const session = require("express-session");
 const reviewSchema = require("./Joi/review.js");
-const listing = require("./routes/listing.js");
+const listingRouter = require("./routes/listing.js");
+const userRouter = require("./routes/user.js");
 const { kMaxLength } = require("buffer");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
-// const User = require("./models/user.js");
+const User = require("./models/user.js");
 
 
 
@@ -48,10 +49,10 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-// passport.use(new LocalStrategy(User.authenticate()));
+passport.use(new LocalStrategy(User.authenticate()));
 
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 main().then(() => {
     console.log("connection sucess:");
@@ -67,15 +68,8 @@ app.use((req,res,next)=>{
     next();
 });
 
-app.get("/demouser",async(req,res)=>{
-    let fakeuser = new User({
-        email:"kali@gmail.com",
-        username:"kalicharan"
-    });
-    const newUser = await User.register(fakeuser,"helloworld");
-});
-
-app.use("/listing", listing); 
+app.use("/listing", listingRouter); 
+app.use("/signup",userRouter);
 
 app.use((req, res, next) => {
     next(new ExpressError(404, "Page not found"));
